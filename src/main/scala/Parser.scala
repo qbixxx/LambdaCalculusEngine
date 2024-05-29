@@ -24,5 +24,21 @@ object Parser {
     case TokenVariable(nombre) :: resto => (Variable(nombre), resto)
   }
 
+  def buildFromAst(ast: AST): String = ast match {
+    case Variable(name) => name
+    case Abstraccion(param, body) =>
+      val paramStr = param.name
+      val bodyStr = buildFromAst(body)
+      s"λ$paramStr.$bodyStr"
+    case Aplicacion(func, arg) =>
+      val funcStr = buildFromAst(func)
+      val argStr = buildFromAst(arg)
+      s"($funcStr $argStr)"
+  }
+
+  def parse(tokens: List[Token]): AST = {
+    val (ast, tokensRestantes) = parseExpr(tokens)
+    ast
+  }
 
 }
