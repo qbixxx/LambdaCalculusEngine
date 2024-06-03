@@ -16,7 +16,7 @@ object InterpreteLambda {
     val input = readLine("$ ")
     input match {
       case "mode" => println(modoActual)
-      case "exit" => //salir
+      case "exit" => System.exit(0)
       case "set call-by-name" =>
         modoActual = ModoNormal
       case "set call-by-value" =>
