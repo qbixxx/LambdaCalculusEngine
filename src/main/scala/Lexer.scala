@@ -9,14 +9,13 @@ case class TokenVariable(name: String) extends Token
 object Lexer {
   def tokenize(input: String): List[Token] = input.toList match {
     case Nil => List.empty
-    case 'λ' :: tail => TokenLambda :: tokenize(tail.mkString)
-    case '/' :: tail => TokenLambda :: tokenize(tail.mkString)
+    case ('λ' | '/') :: tail => TokenLambda :: tokenize(tail.mkString)
     case '.' :: tail => TokenPunto :: tokenize(tail.mkString)
     case '(' :: tail => TokenParIzq :: tokenize(tail.mkString)
     case ')' :: tail => TokenParDer :: tokenize(tail.mkString)
     case ' ' :: tail => TokenEspacio :: tokenize(tail.mkString)
     case _ =>
-      val (variable, rest) = input.span(c => c != ' ' && c != 'λ' && c != '.' && c != '(' && c != ')')
+      val (variable, rest) = input.span(c => c != ' ' && c != '/' && c != 'λ' && c != '.' && c != '(' && c != ')')
       TokenVariable(variable) :: tokenize(rest)
   }
 }

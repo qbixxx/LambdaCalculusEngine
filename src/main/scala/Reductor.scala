@@ -1,5 +1,5 @@
 object Reductor {
-  def conversionAlpha(ast: AST, nombreViejo: String, nombreNuevo: String): AST = ast match {
+  private def conversionAlpha(ast: AST, nombreViejo: String, nombreNuevo: String): AST = ast match {
     case Variable(nombre) if nombre == nombreViejo => Variable(nombreNuevo)
     case Variable(nombre) => Variable(nombre)
     case Abstraccion(Variable(parametro), cuerpo) if parametro == nombreViejo =>
@@ -9,7 +9,7 @@ object Reductor {
     case Aplicacion(funcion, argumento) =>
       Aplicacion(conversionAlpha(funcion, nombreViejo, nombreNuevo), conversionAlpha(argumento, nombreViejo, nombreNuevo))
   }
-  def sustituir(ast: AST, parametro: String, reemplazo: AST): AST = ast match {
+  private def sustituir(ast: AST, parametro: String, reemplazo: AST): AST = ast match {
     case Variable(nombre) if nombre == parametro => reemplazo
     case Variable(nombre) => Variable(nombre)
     case Abstraccion(Variable(nombre), cuerpo) if nombre == parametro => Abstraccion(Variable(nombre), cuerpo)
@@ -24,7 +24,7 @@ object Reductor {
     case Aplicacion(func, argumento) =>
       Aplicacion(sustituir(func, parametro, reemplazo), sustituir(argumento, parametro, reemplazo))
   }
-  def betaReduce(ast: AST): AST = ast match {
+  private def betaReduce(ast: AST): AST = ast match {
     case Aplicacion(Abstraccion(Variable(nombre), cuerpo), argumento) =>
       if (variablesLibres(argumento).contains(nombre)) {
         val nuevoNombre = nombre + "*"

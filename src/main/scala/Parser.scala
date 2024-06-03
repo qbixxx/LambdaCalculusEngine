@@ -19,9 +19,12 @@ object Parser {
           val (argumento, despArg) = parseExpr(despEspacio)
           despArg match {
             case TokenParDer :: tokensRestantes => (Aplicacion(funcion, argumento), tokensRestantes)
+            case _ => throw new Exception("Error de sintaxis")
           }
+        case _ => throw new Exception("Error de sintaxis")
       }
     case TokenVariable(nombre) :: resto => (Variable(nombre), resto)
+    case _ => throw new Exception("Error de sintaxis")
   }
 
   def buildFromAst(ast: AST): String = ast match {
