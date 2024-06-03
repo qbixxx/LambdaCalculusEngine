@@ -10,6 +10,7 @@ object Lexer {
   def tokenize(input: String): List[Token] = input.toList match {
     case Nil => List.empty
     case 'λ' :: tail => TokenLambda :: tokenize(tail.mkString)
+    case '/' :: tail => TokenLambda :: tokenize(tail.mkString)
     case '.' :: tail => TokenPunto :: tokenize(tail.mkString)
     case '(' :: tail => TokenParIzq :: tokenize(tail.mkString)
     case ')' :: tail => TokenParDer :: tokenize(tail.mkString)
