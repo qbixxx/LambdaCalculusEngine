@@ -24,7 +24,7 @@ run
 ````shell
 exit
 ````
-Se deja a continuacion una expresion de ejemplo que demuestra la reducción beta y la conversión alfa:
+Se deja a continuación una expresion lambda de ejemplo que demuestra la reducción beta y la conversión alfa:
 ````shell
 (λy.λb.b ((λf.λb.f b) b))
 ````
