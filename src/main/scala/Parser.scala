@@ -27,15 +27,15 @@ object Parser {
     case _ => throw new Exception("Error de sintaxis")
   }
 
-  def buildFromAst(ast: AST): String = ast match {
+  def construirConAST(ast: AST): String = ast match {
     case Variable(name) => name
     case Abstraccion(param, body) =>
       val paramStr = param.name
-      val bodyStr = buildFromAst(body)
+      val bodyStr = construirConAST(body)
       s"λ$paramStr.$bodyStr"
     case Aplicacion(func, arg) =>
-      val funcStr = buildFromAst(func)
-      val argStr = buildFromAst(arg)
+      val funcStr = construirConAST(func)
+      val argStr = construirConAST(arg)
       s"($funcStr $argStr)"
   }
 
