@@ -28,11 +28,11 @@ object InterpreteLambda {
         modoActual match {
           case ModoNormal =>
             val astReducido = Reductor.callByName(ast)
-            val expReducida = Parser.buildFromAst(astReducido)
+            val expReducida = Parser.construirConAST(astReducido)
             println(expReducida)
           case CallByValue =>
             val astReducido = Reductor.callByValue(ast)
-            val expReducida = Parser.buildFromAst(astReducido)
+            val expReducida = Parser.construirConAST(astReducido)
             println(expReducida)
           case VariablesLibres =>
             val variablesLibres = Reductor.variablesLibres(ast)
