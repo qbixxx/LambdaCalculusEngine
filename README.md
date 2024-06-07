@@ -24,6 +24,10 @@ run
 ````shell
 exit
 ````
+Se deja a continuacion una expresion de ejemplo que demuestra la reducción beta y la conversión alfa:
+````(λy.λb.b ((λf.λb.f b) b))
+exit
+````
 
 Nota: si compilas el proyecto desde windows utilizar el simbolo "/" en vez del simbolo "λ" ya que powershell no lo 
 soporta.
