@@ -1,9 +1,9 @@
 # Interprete Lambda.
 
 Contributors:
-- Valentin Cedeño @qbixxx
-- Valentin Calomino @vcalomi
-- Luciano Salerno @SalernoLuciano
+- Valentin Cedeño [@qbixxx](https://github.com/qbixxx/)
+- Valentin Calomino [@vcalomi](https://github.com/vcalomi)
+- Luciano Salerno [@SalernoLuciano](https://github.com/SalernoLuciano)
 
 El proyecto utiliza Scala 3.3.3 y sbt.
 
