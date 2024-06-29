@@ -1,10 +1,9 @@
-# TP2-Interprete Lambda.
+# Interprete Lambda.
 
-Grupo 12 - Los Devaluados:
-- Valentin Cedeño
-- Valentin Calomino
-- Luciano Salerno
-- Damian Lima
+Contributors:
+- Valentin Cedeño @qbixxx
+- Valentin Calomino @vcalomi
+- Luciano Salerno @SalernoLuciano
 
 El proyecto utiliza Scala 3.3.3 y sbt.
 
