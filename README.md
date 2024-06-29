@@ -1,4 +1,4 @@
-# TP2-Interprete Lambda
+# TP2-Interprete Lambda.
 
 Grupo 12 - Los Devaluados:
 - Valentin Cedeño
