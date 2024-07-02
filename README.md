@@ -24,6 +24,8 @@ Contributors:
 | `(λx.λx.(y x) z)` | `λx.(y x)` | `λx.(y x)` |
 | `(λy.λb.b ((λf.λb.f b) b))` |  `λb*.b*` | `λb*.b*` |
 
+# Compilation:
+
 The project uses Scala 3.3.3 and sbt.
 
 For running the program open the sbt interpreter using:
