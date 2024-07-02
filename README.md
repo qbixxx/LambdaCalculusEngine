@@ -20,7 +20,7 @@ Contributors:
 | `(λx.λy.x y) λy*.y` | `λy*.y` | `λy*.y` |
 | `(λf.(f λx.λy.x) ((λx.λy.λf.((f x) y) a) b))` | `a` | `a` |
 | `(λx.λx.(y x) z)` | `λx.(y x)` | `λx.(y x)` |
-| `(λy.λb.b ((λf.λb.f b) b))` |  `λb*.b*` | `λb*.b*`
+| `(λy.λb.b ((λf.λb.f b) b))` |  `λb*.b*` | `λb*.b*` |
 The project uses Scala 3.3.3 and sbt.
 
 For running the program open the sbt interpreter using:
