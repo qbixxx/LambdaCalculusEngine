@@ -16,7 +16,7 @@ Contributors:
 
 | Expression | Call-by-Name Result | Call-by-Value Result |
 | ---------- | ------------------- | -------------------- |
-| `(λx.λy.y (λx.(x x) λx.(x x))) λy.y` | Infinite recursion | Infinite recursion |
+| `(λx.λy.y (λx.(x x) λx.(x x)))` | `λy.y` | Infinite recursion |
 | `(λx.λy.x y) λy*.y` | `λy*.y` | `λy*.y` |
 | `(λf.(f λx.λy.x) ((λx.λy.λf.((f x) y) a) b))` | `a` | `a` |
 | `(λx.λx.(y x) z)` | `λx.(y x)` | `λx.(y x)` |
