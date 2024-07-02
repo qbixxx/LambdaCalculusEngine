@@ -41,6 +41,7 @@ exit
 ````
 
 Note: If you compile the project from Windows, use the symbol "/" instead of the symbol "λ" as PowerShell does not support it.
+
 Contributors:
 - Valentin Cedeño [@qbixxx](https://github.com/qbixxx/)
 - Valentin Calomino [@vcalomi](https://github.com/vcalomi)
