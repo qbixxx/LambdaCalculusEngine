@@ -1,7 +1,7 @@
 # Lambda Interpreter.
 Lambda interpreter built in Scala. Supports CbN, CbV and Free Variables calculations.
 
-#Lambda Expression Symbols available:
+# Lambda Expression Symbols available:
 - **"λ"**: The lambda symbol represents the beginning of an abstraction.
 - **" "**: The space allows for separating the argument from the function in an application.
 - **"."**: The dot allows for separating the argument from the body of an abstraction.
