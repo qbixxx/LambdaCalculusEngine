@@ -1,6 +1,11 @@
 # Lambda Interpreter.
 Lambda interpreter built in Scala. Supports CbN, CbV and Free Variables calculations.
 
+Contributors:
+- Valentin Cedeño [@qbixxx](https://github.com/qbixxx/)
+- Valentin Calomino [@vcalomi](https://github.com/vcalomi)
+- Luciano Salerno [@SalernoLuciano](https://github.com/SalernoLuciano)
+
 # Lambda Expression Symbols available:
 - **"λ"**: The lambda symbol represents the beginning of an abstraction.
 - **" "**: The space allows for separating the argument from the function in an application.
@@ -9,10 +14,12 @@ Lambda interpreter built in Scala. Supports CbN, CbV and Free Variables calculat
 - **")"**:" The right parenthesis allows for representing the end of an application.
 - **string**: Any other string, different from the ones above, will be interpreted as a variable.
 
-Contributors:
-- Valentin Cedeño [@qbixxx](https://github.com/qbixxx/)
-- Valentin Calomino [@vcalomi](https://github.com/vcalomi)
-- Luciano Salerno [@SalernoLuciano](https://github.com/SalernoLuciano)
+| Expression | Call-by-Name Result | Call-by-Value Result |
+| ---------- | ------------------- | -------------------- |
+| `(λx.λy.y (λx.(x x) λx.(x x))) λy.y` | Infinite recursion | Infinite recursion |
+| `(λx.λy.x y) λy*.y` | `λy*.y` | `λy*.y` |
+| `(λf.(f λx.λy.x) ((λx.λy.λf.((f x) y) a) b))` | `a` | `a` |
+| `(λx.λx.(y x) z)` | `λx.(y x)` | `λx.(y x)` |
 
 The project uses Scala 3.3.3 and sbt.
 
