@@ -1,11 +1,6 @@
 # Lambda Interpreter.
 Lambda interpreter built in Scala. Supports CbN, CbV and Free Variables calculations.
 
-Contributors:
-- Valentin Cedeño [@qbixxx](https://github.com/qbixxx/)
-- Valentin Calomino [@vcalomi](https://github.com/vcalomi)
-- Luciano Salerno [@SalernoLuciano](https://github.com/SalernoLuciano)
-
 # Lambda Expression Symbols available:
 - **"λ"**: The lambda symbol represents the beginning of an abstraction.
 - **" "**: The space allows for separating the argument from the function in an application.
@@ -46,3 +41,7 @@ exit
 ````
 
 Note: If you compile the project from Windows, use the symbol "/" instead of the symbol "λ" as PowerShell does not support it.
+Contributors:
+- Valentin Cedeño [@qbixxx](https://github.com/qbixxx/)
+- Valentin Calomino [@vcalomi](https://github.com/vcalomi)
+- Luciano Salerno [@SalernoLuciano](https://github.com/SalernoLuciano)
