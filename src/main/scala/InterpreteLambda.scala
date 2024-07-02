@@ -13,7 +13,7 @@ object InterpreteLambda {
   var modoActual: Modo = ModoNormal
 
   def main(): Unit = {
-    val input = readLine("("+modoActual+")"> ")
+    val input = readLine("("+modoActual+")$ ")
     input match {
       case "mode" => println(modoActual)
       case "exit" => System.exit(0)
