@@ -11,17 +11,18 @@ Lambda interpreter built in Scala. Supports CbN, CbV and Free Variables calculat
 
 ## Commands and syntax
 
-1. `<λexp> ::=`
-   - `<var>` #Variable
-   - `<LAMBDA> <var> <DOT> <λexp>` #Abstraction
-   - `<LPAR> <λexp> <SPACE> <λexp> <RPAR>` #Application
+1. `The Lambda expression must have the following syntax structure:`
+   -` <λexp> ::=`
+   -- `<var>` #Variable
+   -- `<LAMBDA> <var> <DOT> <λexp>` #Abstraction
+   -- `<LPAR> <λexp> <SPACE> <λexp> <RPAR>` #Application
 
-2. `set <reduction strategy>`
+3. `set <reduction strategy>`
    - `set call-by-name` (default strategy)
    - `set call-by-value`
    - `set free-variables`
 
-3. `exit`
+4. `exit`
 
 
 ## IO Examples:
