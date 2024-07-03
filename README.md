@@ -20,12 +20,12 @@ Lambda interpreter built in Scala. Supports CbN, CbV and Free Variables calculat
 | `(λy.λb.b ((λf.λb.f b) b))` |  `λb*.b*` | `λb*.b*` |
 
 # Commands:
-- <λexp> ::= | "<var>" #variable | <Lambda> <var> <DOT> <λexp> #Abstraction | <LPAR> <λexp> <SPACE> <λexp> <RPAR> #Aplication
+- ```plaintext <λexp> ::= | <var> #variable | <Lambda> <var> <DOT> <λexp> #Abstraction | <LPAR> <λexp> <SPACE> <λexp> <RPAR> #Aplication
 - set <reduction strategy>
 -- set call-by-name (default strategy)
 -- set call-by-value
 -- set free-variables (returns the free variables of the expression)
-- exit  
+- exit   
 
 # Compilation:
 
