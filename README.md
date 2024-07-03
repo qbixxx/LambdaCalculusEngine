@@ -13,7 +13,7 @@ Lambda interpreter built in Scala. Supports CbN, CbV and Free Variables calculat
 
 ## Commands and syntax
 
-1. `The Lambda expression must have the following syntax structure:`
+1. `The Lambda expression must follow the syntax structure defined as:`
    - `<λexp> ::=`
      - `<var>` #Variable
      - `<LAMBDA> <var> <DOT> <λexp>` #Abstraction
