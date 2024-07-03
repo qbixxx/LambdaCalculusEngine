@@ -9,15 +9,6 @@ Lambda interpreter built in Scala. Supports CbN, CbV and Free Variables calculat
 - **")"**:" The right parenthesis allows for representing the end of an application.
 - **string**: Any other string, different from the ones above, will be interpreted as a variable.
 
-# Commands:
-- set:
-- - set call-by-name (Default reduction strategy)
-  - set call-by-value
-- <λexp> ::= | <var> #Variable
-| <LAMBDA> <var> <DOT> <λexp> #Abstracción
-| <LPAR> <λexp> <SPACE> <λexp> <RPAR> #Aplicación
-
-
 # IO Examples:
 
 | Expression | Call-by-Name Result | Call-by-Value Result |
