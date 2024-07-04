@@ -30,9 +30,10 @@ Lambda interpreter built in Scala. Supports CbN, CbV and Free Variables calculat
 | ---------- | ------------------- | -------------------- |
 | `(λx.λy.y (λx.(x x) λx.(x x)))` | `λy.y` | Infinite recursion |
 | `(λx.λy.x y)` | `λy*.y` | `λy*.y` |
+| `(λy.λb.b ((λf.λb.f b) b))` |  `λb*.b*` | `λb*.b*` |
 | `(λf.(f λx.λy.x) ((λx.λy.λf.((f x) y) a) b))` | `a` | `a` |
 | `(λx.λx.(y x) z)` | `λx.(y x)` | `λx.(y x)` |
-| `(λy.λb.b ((λf.λb.f b) b))` |  `λb*.b*` | `λb*.b*` |
+
 
 # Compilation:
 
