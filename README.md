@@ -1,4 +1,4 @@
-# λ Lambda Calculus Engine λ.
+# λ Lambda Calculus Engine λ
 Lambda interpreter built in Scala. Supports CbN, CbV and Free Variables calculations.
 
 ## Lambda Expression Symbols available:
