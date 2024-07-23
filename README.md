@@ -1,7 +1,7 @@
-# Lambda Interpreter.
+# λ Lambda Calculus Engine λ
 Lambda interpreter built in Scala. Supports CbN, CbV and Free Variables calculations.
 
-# Lambda Expression Symbols available:
+## Lambda Expression Symbols available:
 - **"λ"**: The lambda symbol represents the beginning of an abstraction.
 - **" "**: The space allows for separating the argument from the function in an application.
 - **"."**: The dot allows for separating the argument from the body of an abstraction.
@@ -9,15 +9,32 @@ Lambda interpreter built in Scala. Supports CbN, CbV and Free Variables calculat
 - **")"**:" The right parenthesis allows for representing the end of an application.
 - **string**: Any other string, different from the ones above, will be interpreted as a variable.
 
-# IO Examples:
+## Commands and syntax:
+
+1. `The Lambda expression must follow the syntax structure defined as:`
+   - `<λexp> ::=`
+     - `<var>` #Variable
+     - `<LAMBDA> <var> <DOT> <λexp>` #Abstraction
+     - `<LPAR> <λexp> <SPACE> <λexp> <RPAR>` #Application
+
+2. `set <reduction strategy>`
+   - `set call-by-name` (default strategy)
+   - `set call-by-value`
+   - `set free-variables`
+
+3. `exit`
+
+## IO Examples:
 
 | Expression | Call-by-Name Result | Call-by-Value Result |
 | ---------- | ------------------- | -------------------- |
 | `(λx.λy.y (λx.(x x) λx.(x x)))` | `λy.y` | Infinite recursion |
-| `(λx.λy.x y)` | `λy*.y` | `λy*.y` |
-| `(λf.(f λx.λy.x) ((λx.λy.λf.((f x) y) a) b))` | `a` | `a` |
 | `(λx.λx.(y x) z)` | `λx.(y x)` | `λx.(y x)` |
+| `(λx.λy.x y)` | `λy*.y` | `λy*.y` |
 | `(λy.λb.b ((λf.λb.f b) b))` |  `λb*.b*` | `λb*.b*` |
+| `(λf.(f λx.λy.x) ((λx.λy.λf.((f x) y) a) b))` | `a` | `a` |
+
+
 
 # Compilation:
 
