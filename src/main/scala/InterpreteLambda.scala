@@ -8,7 +8,7 @@ object InterpreteLambda {
 
   case object CallByValue extends Modo
 
-  case object VariablesLibres extends Modo
+  case object FreeVariables extends Modo
 
   var modoActual: Modo = CallByName
 
@@ -21,7 +21,7 @@ object InterpreteLambda {
         modoActual = CallByName
       case "set call-by-value" =>
         modoActual = CallByValue
-      case "set free-variables" => modoActual = VariablesLibres
+      case "set free-variables" => modoActual = FreeVariables
       case expresion =>
         val tokens = Lexer.tokenize(expresion)
         val ast = Parser.parse(tokens)
@@ -34,7 +34,7 @@ object InterpreteLambda {
             val astReducido = Reductor.callByValue(ast)
             val expReducida = Parser.construirConAST(astReducido)
             println(expReducida)
-          case VariablesLibres =>
+          case FreeVariables =>
             val variablesLibres = Reductor.variablesLibres(ast)
             println(variablesLibres)
         }
