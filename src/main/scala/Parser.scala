@@ -33,6 +33,8 @@ object Parser {
       val paramStr = param.name
       val bodyStr = construirConAST(body)
       s"λ$paramStr.$bodyStr"
+      
+    
     case Aplicacion(func, arg) =>
       val funcStr = construirConAST(func)
       val argStr = construirConAST(arg)

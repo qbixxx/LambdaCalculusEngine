@@ -4,13 +4,13 @@ object InterpreteLambda {
 
   sealed trait Modo
 
-  case object ModoNormal extends Modo
+  case object CallByName extends Modo
 
   case object CallByValue extends Modo
 
   case object VariablesLibres extends Modo
 
-  var modoActual: Modo = ModoNormal
+  var modoActual: Modo = CallByName
 
   def main(): Unit = {
     val input = readLine("("+modoActual+")$ ")
@@ -18,7 +18,7 @@ object InterpreteLambda {
       case "mode" => println(modoActual)
       case "exit" => System.exit(0)
       case "set call-by-name" =>
-        modoActual = ModoNormal
+        modoActual = CallByName
       case "set call-by-value" =>
         modoActual = CallByValue
       case "set free-variables" => modoActual = VariablesLibres
@@ -26,7 +26,7 @@ object InterpreteLambda {
         val tokens = Lexer.tokenize(expresion)
         val ast = Parser.parse(tokens)
         modoActual match {
-          case ModoNormal =>
+          case CallByName =>
             val astReducido = Reductor.callByName(ast)
             val expReducida = Parser.construirConAST(astReducido)
             println(expReducida)
