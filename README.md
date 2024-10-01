@@ -59,7 +59,7 @@ exit
 
 ## Demo run:
 
-![Peek 2024-09-30 23-38](https://github.com/user-attachments/assets/028f274e-388b-4d2b-b6f6-30fd9db599aa)
+![Peek 2024-10-01 20-12](https://github.com/user-attachments/assets/6993862a-d99f-4965-9e1a-4c21d1932b9c)
 
 
 Note: If you run the project on Windows, use the symbol "/" instead of the symbol "λ" as PowerShell does not support it.
