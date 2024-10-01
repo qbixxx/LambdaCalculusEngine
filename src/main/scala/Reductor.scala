@@ -1,97 +1,88 @@
-object Reductor {
-  private def conversionAlpha(ast: AST, nombreViejo: String, nombreNuevo: String): AST = ast match {
-    case Variable(nombre) if nombre == nombreViejo => Variable(nombreNuevo)
-    case Variable(nombre) => Variable(nombre)
-    case Abstraccion(Variable(parametro), cuerpo) if parametro == nombreViejo =>
-      Abstraccion(Variable(nombreNuevo), conversionAlpha(cuerpo, nombreViejo, nombreNuevo))
-    case Abstraccion(Variable(parametro), cuerpo) =>
-      // Si el nuevo nombre ya está siendo usado como variable libre en el cuerpo, renombrar la variable
-      if (variablesLibres(cuerpo).contains(nombreNuevo)) {
-        val nuevoParametro = nombreNuevo + "*"
-        Abstraccion(Variable(nuevoParametro), conversionAlpha(cuerpo, nombreViejo, nuevoParametro))
+object Reducer {
+  private def alphaConversion(ast: AST, oldName: String, newName: String): AST = ast match {
+    case Variable(name) if name == oldName => Variable(newName)
+    case Variable(name) => Variable(name)
+    case Abstraction(Variable(param), body) if param == oldName =>
+      Abstraction(Variable(newName), alphaConversion(body, oldName, newName))
+    case Abstraction(Variable(param), body) =>
+      if (freeVariables(body).contains(newName)) {
+        val newParam = newName + "*"
+        Abstraction(Variable(newParam), alphaConversion(body, oldName, newParam))
       } else {
-        Abstraccion(Variable(parametro), conversionAlpha(cuerpo, nombreViejo, nombreNuevo))
+        Abstraction(Variable(param), alphaConversion(body, oldName, newName))
       }
-    case Aplicacion(funcion, argumento) =>
-      Aplicacion(conversionAlpha(funcion, nombreViejo, nombreNuevo), conversionAlpha(argumento, nombreViejo, nombreNuevo))
+    case Application(func, arg) =>
+      Application(alphaConversion(func, oldName, newName), alphaConversion(arg, oldName, newName))
   }
   
-  private def sustituir(ast: AST, parametro: String, reemplazo: AST): AST = ast match {
-    case Variable(nombre) if nombre == parametro => reemplazo
-    case Variable(nombre) => Variable(nombre)
-    case Abstraccion(Variable(nombre), cuerpo) if nombre == parametro => Abstraccion(Variable(nombre), cuerpo)
-    case Abstraccion(Variable(nombre), cuerpo) =>
-      // Solo realizar la conversión alfa si hay una colisión real entre la variable libre y la ligada
-      if (variablesLibres(reemplazo).contains(nombre)) {
-        val nuevoNombre = nombre + "*"
-        val cuerpoRenombrado = conversionAlpha(cuerpo, nombre, nuevoNombre)
-        Abstraccion(Variable(nuevoNombre), sustituir(cuerpoRenombrado, parametro, reemplazo))
+  private def substitute(ast: AST, param: String, replacement: AST): AST = ast match {
+    case Variable(name) if name == param => replacement
+    case Variable(name) => Variable(name)
+    case Abstraction(Variable(name), body) if name == param => Abstraction(Variable(name), body)
+    case Abstraction(Variable(name), body) =>
+      if (freeVariables(replacement).contains(name)) {
+        val newName = name + "*"
+        val renamedBody = alphaConversion(body, name, newName)
+        Abstraction(Variable(newName), substitute(renamedBody, param, replacement))
       } else {
-        Abstraccion(Variable(nombre), sustituir(cuerpo, parametro, reemplazo))
+        Abstraction(Variable(name), substitute(body, param, replacement))
       }
-    case Aplicacion(func, argumento) =>
-      Aplicacion(sustituir(func, parametro, reemplazo), sustituir(argumento, parametro, reemplazo))
+    case Application(func, arg) =>
+      Application(substitute(func, param, replacement), substitute(arg, param, replacement))
   }
   
   private def betaReduce(ast: AST): AST = ast match {
-    case Aplicacion(Abstraccion(Variable(nombre), cuerpo), argumento) =>
-      if (variablesLibres(argumento).contains(nombre)) {
-        val nuevoNombre = nombre + "*"
-        val cuerpoRenombrado = conversionAlpha(cuerpo, nombre, nuevoNombre)
-        sustituir(cuerpoRenombrado, nuevoNombre, argumento)
+    case Application(Abstraction(Variable(name), body), arg) =>
+      if (freeVariables(arg).contains(name)) {
+        val newName = name + "*"
+        val renamedBody = alphaConversion(body, name, newName)
+        substitute(renamedBody, newName, arg)
       } else {
-        sustituir(cuerpo, nombre, argumento)
+        substitute(body, name, arg)
       }
     case _ => ast
   }
   
   def callByName(ast: AST): AST = ast match {
-    case Aplicacion(Abstraccion(Variable(parametro), cuerpo), argumento) =>
-      // Reduce la expresión resultante de la beta-reducción
-      callByName(betaReduce(Aplicacion(Abstraccion(Variable(parametro), cuerpo), argumento)))
-    case Aplicacion(func, argumento) =>
-      // Reduce la función primero, luego reduce el argumento
-      val funcionReducida = callByName(func)
-      funcionReducida match {
-        case Abstraccion(Variable(parametro), cuerpo) =>
-          // Aplica la reducción de beta si corresponde
-          callByName(Aplicacion(funcionReducida, argumento))
-        case _ => Aplicacion(funcionReducida, callByName(argumento))
+    case Application(Abstraction(Variable(param), body), arg) =>
+      callByName(betaReduce(Application(Abstraction(Variable(param), body), arg)))
+    case Application(func, arg) =>
+      val reducedFunc = callByName(func)
+      reducedFunc match {
+        case Abstraction(Variable(param), body) =>
+          callByName(Application(reducedFunc, arg))
+        case _ => Application(reducedFunc, callByName(arg))
       }
-    case Abstraccion(Variable(parametro), cuerpo) =>
-      // Reducir el cuerpo de la abstracción
-      Abstraccion(Variable(parametro), callByName(cuerpo))
-    case Variable(nombre) => Variable(nombre)
+    case Abstraction(Variable(param), body) =>
+      Abstraction(Variable(param), callByName(body))
+    case Variable(name) => Variable(name)
   }
-  
   
   def callByValue(ast: AST): AST = ast match {
-    case Aplicacion(func, argumento) =>
-      // Reduce la función y el argumento completamente
-      val funcionReducida = callByValue(func)
-      val argumentoReducido = callByValue(argumento)
-      funcionReducida match {
-        case Abstraccion(Variable(parametro), cuerpo) =>
-          callByValue(betaReduce(Aplicacion(funcionReducida, argumentoReducido)))
-        case _ => Aplicacion(funcionReducida, argumentoReducido)
+    case Application(func, arg) =>
+      val reducedFunc = callByValue(func)
+      val reducedArg = callByValue(arg)
+      reducedFunc match {
+        case Abstraction(Variable(param), body) =>
+          callByValue(betaReduce(Application(reducedFunc, reducedArg)))
+        case _ => Application(reducedFunc, reducedArg)
       }
-    case Abstraccion(Variable(parametro), cuerpo) =>
-      Abstraccion(Variable(parametro), callByValue(cuerpo))
-    case Variable(nombre) => Variable(nombre)
+    case Abstraction(Variable(param), body) =>
+      Abstraction(Variable(param), callByValue(body))
+    case Variable(name) => Variable(name)
   }
   
-  def variablesLibres(ast: AST): Set[String] = ast match {
-    case Variable(nombre) => Set(nombre)
-    case Abstraccion(Variable(parametro), cuerpo) => variablesLibres(cuerpo) - parametro
-    case Aplicacion(func, argumento) => variablesLibres(func) ++ variablesLibres(argumento)
+  def freeVariables(ast: AST): Set[String] = ast match {
+    case Variable(name) => Set(name)
+    case Abstraction(Variable(param), body) => freeVariables(body) - param
+    case Application(func, arg) => freeVariables(func) ++ freeVariables(arg)
   }
 }
 
-// Función auxiliar para generar un nombre único que no colisione con las variables existentes
-private def generateUniqueName(base: String, nombresEnUso: Set[String]): String = {
+private def generateUniqueName(base: String, usedNames: Set[String]): String = {
   var newName = base + "*"
   var counter = 1
-  while (nombresEnUso.contains(newName)) {
+  while (usedNames.contains(newName)) {
     newName = base + "*" + counter
     counter += 1
   }
