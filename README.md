@@ -57,7 +57,14 @@ run
 exit
 ````
 
+## Demo run:
+
+![Peek 2024-09-30 23-38](https://github.com/user-attachments/assets/028f274e-388b-4d2b-b6f6-30fd9db599aa)
+
+
 Note: If you run the project on Windows, use the symbol "/" instead of the symbol "λ" as PowerShell does not support it.
+
+
 
 Contributors:
 - Valentin Cedeño [@qbixxx](https://github.com/qbixxx/)
