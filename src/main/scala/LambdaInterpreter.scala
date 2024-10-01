@@ -1,4 +1,3 @@
-
 import scala.io.StdIn.readLine
 
 object LambdaInterpreter {
@@ -36,8 +35,8 @@ object LambdaInterpreter {
             val reducedExp = Parser.buildWithAST(reducedAst)
             println(reducedExp)
           case FreeVariables =>
-            val freeVariables = Reducer.freeVariables(ast)
-            println(freeVariables)
+            // Only print free variables when mode is set to FreeVariables
+            Reducer.printFreeVariables(ast)
         }
     }
     main()
