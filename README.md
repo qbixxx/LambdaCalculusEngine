@@ -1,5 +1,7 @@
 # λ Lambda Calculus Engine λ
 ![GitHub license](https://img.shields.io/github/license/qbixxx/LambdaCalculusEngine)
+![GitHub contributors](https://img.shields.io/github/contributors/qbixxx/LambdaCalculusEngine)
+![GitHub release (latest by date)](https://img.shields.io/github/v/release/qbixxx/LambdaCalculusEngine)
 
 Lambda interpreter built in Scala. Supports CbN, CbV and Free Variables calculations.
 
