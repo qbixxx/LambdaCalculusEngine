@@ -40,7 +40,7 @@ Lambda interpreter built in Scala. Supports CbN, CbV and Free Variables calculat
 
 
 
-# Compilation:
+## Compilation:
 
 The project uses Scala 3.3.3 and sbt.
 
