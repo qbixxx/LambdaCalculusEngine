@@ -1,4 +1,4 @@
-# λ Lambda Calculus Engine λ
+# λ.Lambda Calculus Engine
 ![GitHub license](https://img.shields.io/github/license/qbixxx/LambdaCalculusEngine)
 ![GitHub contributors](https://img.shields.io/github/contributors/qbixxx/LambdaCalculusEngine)
 ![GitHub release (latest by date)](https://img.shields.io/github/v/release/qbixxx/LambdaCalculusEngine)
