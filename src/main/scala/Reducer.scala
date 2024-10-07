@@ -5,6 +5,7 @@ object Reducer {
   val GREEN = "\u001b[32m"
   val YELLOW = "\u001b[33m"
   val BLUE = "\u001b[34m"
+  val CYAN = "\u001b[36m"
   val RESET = "\u001b[0m"
   
   // Alpha conversion - renaming bound variables to avoid collision
@@ -114,15 +115,31 @@ object Reducer {
       println(s"${BLUE}No free variables found${RESET}")
     }
   }
-}
-
-// Function to generate unique names to avoid collisions
-private def generateUniqueName(base: String, usedNames: Set[String]): String = {
-  var newName = base + "*"
-  var counter = 1
-  while (usedNames.contains(newName)) {
-    newName = base + "*" + counter
-    counter += 1
+  
+  // Función para imprimir el AST en forma de árbol usando caracteres ASCII con colores
+  private def printAST(node: AST, prefix: String = "", isLast: Boolean = true): List[String] = {
+    node match {
+      case Variable(name) =>
+        List(prefix + (if (isLast) "└─" else "├─") + s"${CYAN}Variable($name)${RESET}")
+      
+      case Abstraction(param, body) =>
+        val abstrNode = prefix + (if (isLast) "└─" else "├─") + s"${GREEN}λ${RESET}"
+        val paramNode = prefix + (if (isLast) "   " else "│  ") + s"${CYAN}└─Bound(${param.name})${RESET}"
+        val bodyTree = printAST(body, prefix + (if (isLast) "   " else "│  "), true)
+        List(abstrNode, paramNode) ++ bodyTree
+      
+      case Application(func, arg) =>
+        val currentLine = List(prefix + (if (isLast) "└─" else "├─") + s"${YELLOW}app${RESET}")
+        val nextPrefix = prefix + (if (isLast) "   " else "│  ")
+        val leftSubtree = printAST(func, nextPrefix, false)
+        val rightSubtree = printAST(arg, nextPrefix, true)
+        currentLine ++ leftSubtree ++ rightSubtree
+    }
   }
-  newName
+  
+  // Función principal para invocar la impresión
+  def printASTAsTree(root: AST): Unit = {
+    val lines = printAST(root)
+    lines.foreach(println)
+  }
 }
