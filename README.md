@@ -39,7 +39,7 @@ Lambda interpreter built in Scala. Supports CbN, CbV and Free Variables calculat
 | `(λf.(f λx.λy.x) ((λx.λy.λf.((f x) y) a) b))` | `a` | `a` |
 
 ## To do:
-* add boolean and arithmetic expressions
+* Add boolean and arithmetic expressions support
 
 ## Compilation:
 
