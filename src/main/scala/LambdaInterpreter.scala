@@ -2,7 +2,6 @@ import scala.io.StdIn.readLine
 
 object LambdaInterpreter {
   
-  // Definimos el nuevo modo
   sealed trait Mode
   
   case object CallByName extends Mode
@@ -11,7 +10,7 @@ object LambdaInterpreter {
   
   case object FreeVariables extends Mode
   
-  case object PrintAST extends Mode // Nuevo modo para imprimir el AST
+  case object PrintAST extends Mode 
   
   var currentMode: Mode = CallByName
   
@@ -27,7 +26,7 @@ object LambdaInterpreter {
       case "set free-variables" =>
         currentMode = FreeVariables
       case "set ast" =>
-        currentMode = PrintAST // Cambia al modo PrintAST
+        currentMode = PrintAST 
       case expression =>
         val tokens = Lexer.tokenize(expression)
         val ast = Parser.parse(tokens)
@@ -43,10 +42,10 @@ object LambdaInterpreter {
           case FreeVariables =>
             Reducer.printFreeVariables(ast)
           case PrintAST =>
-            // Imprime el AST como árbol en el modo PrintAST
+            
             Reducer.printASTAsTree(ast)
         }
     }
-    main() // Loop recursivo
+    main() 
   }
 }
