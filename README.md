@@ -3,7 +3,7 @@
 ![GitHub contributors](https://img.shields.io/github/contributors/qbixxx/LambdaCalculusEngine)
 ![GitHub release (latest by date)](https://img.shields.io/github/v/release/qbixxx/LambdaCalculusEngine)
 
-Lambda interpreter built in Scala. Supports AST View, CbN, CbV and Free Variables calculations.
+Lambda interpreter built in Scala. Supports AST View, CbN, CbV and Free Variables calculations. Fully functional-oriented implementation.
 
 ## Lambda Expression Symbols available:
 - **"λ"**: The lambda symbol represents the beginning of an abstraction.
