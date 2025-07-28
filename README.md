@@ -25,6 +25,7 @@ Lambda interpreter built in Scala. Supports AST View, CbN, CbV and Free Variable
    - `set call-by-name` (default strategy)
    - `set call-by-value`
    - `set free-variables`
+   - `set ast` (displays the abstract syntax tree of the expression)
 
 3. `exit`
 
