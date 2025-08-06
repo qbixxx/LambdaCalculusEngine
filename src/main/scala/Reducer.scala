@@ -116,7 +116,7 @@ object Reducer {
     }
   }
   
-  // Función para imprimir el AST en forma de árbol usando caracteres ASCII con colores
+  // Function for printing the AST in tree form using ASCII characters with colors
   private def printAST(node: AST, prefix: String = "", isLast: Boolean = true): List[String] = {
     node match {
       case Variable(name) =>
@@ -137,7 +137,7 @@ object Reducer {
     }
   }
   
-  // Función principal para invocar la impresión
+  //Main function to invoke AST printing
   def printASTAsTree(root: AST): Unit = {
     val lines = printAST(root)
     lines.foreach(println)
